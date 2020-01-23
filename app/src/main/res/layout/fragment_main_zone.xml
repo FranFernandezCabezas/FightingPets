@@ -19,27 +19,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/prueba_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="356dp"
-            android:background="#00E66E6E"
-            android:text="@string/hello_blank_fragment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
+        <pl.droidsonroids.gif.GifImageView
             android:id="@+id/monster_sprite_imageView"
-            android:layout_width="241dp"
-            android:layout_height="358dp"
-            android:scaleType="centerCrop"
+            android:layout_width="204dp"
+            android:layout_height="275dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/prueba"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars[3]" />
+            app:layout_constraintVertical_bias="0.695" />
 
         <ProgressBar
             android:id="@+id/lifebar_progressBar"
@@ -56,13 +47,90 @@
             android:id="@+id/lifebar_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="36dp"
-            android:text="TextView"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="14dp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/hunger_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/progressbar_background"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="20"
+            android:progressDrawable="@drawable/stats_progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/hunger_imageView"
+            android:layout_width="65dp"
+            android:layout_height="79dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginBottom="44dp"
+            android:contentDescription="@string/hunger"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/posiblecomida" />
+
+        <ImageView
+            android:id="@+id/happines_imageView"
+            android:layout_width="65dp"
+            android:layout_height="79dp"
+            android:layout_marginStart="174dp"
+            android:layout_marginBottom="40dp"
+            android:contentDescription="@string/happiness"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/posiblefelicidad" />
+
+        <ProgressBar
+            android:id="@+id/happines_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="156dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/progressbar_background"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="20"
+            android:progressDrawable="@drawable/stats_progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/sleep_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="288dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/progressbar_background"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="20"
+            android:progressDrawable="@drawable/stats_progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/sleep_imageView"
+            android:layout_width="55dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="310dp"
+            android:layout_marginBottom="44dp"
+            android:contentDescription="@string/sleepiness"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/posibledormir" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FightingPets</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="about">About</string>
+    <string name="hunger">Hunger</string>
+    <string name="happiness">Happiness</string>
+    <string name="sleepiness">Sleepiness</string>
 </resources>
