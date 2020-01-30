@@ -38,27 +38,38 @@ class MainZoneViewModel {
             db.collection("Monsters").whereEqualTo("userId", user.uid).
                 addSnapshotListener { snapshots, e ->
 
-                for (dc in snapshots!!.documentChanges) {
+                if (!snapshots!!.isEmpty) {
 
-                    when (dc.type) {
-                        DocumentChange.Type.ADDED -> {
-                            maxLife = (dc.document.getLong("maxHP"))!!.toInt()
+                    for (dc in snapshots!!.documentChanges) {
 
-                            actLife = (dc.document.getLong("actHP"))!!.toInt()
+                        when (dc.type) {
+                            DocumentChange.Type.ADDED -> {
+                                maxLife = (dc.document.getLong("maxHP"))!!.toInt()
 
-                            hunger = (dc.document.getLong("hunger"))!!.toInt()
+                                actLife = (dc.document.getLong("actHP"))!!.toInt()
 
-                            happiness = (dc.document.getLong("happiness"))!!.toInt()
+                                hunger = (dc.document.getLong("hunger"))!!.toInt()
 
-                            sleepiness = (dc.document.getLong("sleepiness"))!!.toInt()
+                                happiness = (dc.document.getLong("happiness"))!!.toInt()
 
-                            age = (dc.document.getLong("age"))!!.toInt()
+                                sleepiness = (dc.document.getLong("sleepiness"))!!.toInt()
 
-                            _monster.value = Monster(maxLife, actLife, hunger, happiness, sleepiness, age, R.drawable.prueba)
-                        }
+                                age = (dc.document.getLong("age"))!!.toInt()
 
-                        DocumentChange.Type.MODIFIED -> {
+                                _monster.value = Monster(
+                                    maxLife,
+                                    actLife,
+                                    hunger,
+                                    happiness,
+                                    sleepiness,
+                                    age,
+                                    R.drawable.prueba
+                                )
+                            }
 
+                            DocumentChange.Type.MODIFIED -> {
+
+                            }
                         }
                     }
                 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "536661155685",
+    "firebase_url": "https://fighting-pets.firebaseio.com",
+    "project_id": "fighting-pets",
+    "storage_bucket": "fighting-pets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536661155685:android:7b5f20dd5830bd44994b8c",
+        "android_client_info": {
+          "package_name": "com.example.fightingpets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536661155685-e7oou2cgu1n62ecfk3ad1fibrhsenc4c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fightingpets",
+            "certificate_hash": "316e2da2f338a51788c0b36cbf90edd85c9ad6b5"
+          }
+        },
+        {
+          "client_id": "536661155685-62upla7ma7u60kmgrt6p5f4if8c9aneh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzyevYLWrf2PDaYuA3udrM9dwlHfAwgwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536661155685-62upla7ma7u60kmgrt6p5f4if8c9aneh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
