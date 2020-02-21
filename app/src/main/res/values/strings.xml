@@ -49,5 +49,12 @@
     <string name="secondpart6">it felt an strange bad feeling</string>
     <string name="use">USE</string>
     <string name="accept">Accept</string>
+    <string name="backgroundfor">Just made for a background color</string>
+    <string name="openinventory">Made to open inventory</string>
+    <string name="openwalk">Made to open the walk fragment</string>
+    <string name="opencombat">Made to open combat fragment</string>
+    <string name="object_image_descript">Image of the item selected</string>
+    <string name="open_settings">Made to open the settings fragment</string>
+    <string name="back_mainzone">Made to go back to mainzone</string>
 
 </resources>

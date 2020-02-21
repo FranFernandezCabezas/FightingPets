@@ -10,6 +10,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
+@Suppress("UseExpressionBody")
 class InventoryViewModel : ViewModel() {
 
     // The internal MutableLiveData item that stores the status of the most recent request
@@ -34,7 +35,7 @@ class InventoryViewModel : ViewModel() {
 
     init {
         coroutineScope.launch {
-            var repo = Repo()
+            val repo = Repo()
              repo.getItemsData(_listItems)
         }
     }
@@ -65,6 +66,10 @@ class InventoryViewModel : ViewModel() {
     fun useItem() {
         when(actualItem.value!!.function) {
             // TODO: Method to add the new elements to the database
+            ItemType.HEALING -> TODO()
+            ItemType.HUNGER -> TODO()
+            ItemType.ENERGIZE -> TODO()
+            ItemType.TENT -> TODO()
         }
     }
 }

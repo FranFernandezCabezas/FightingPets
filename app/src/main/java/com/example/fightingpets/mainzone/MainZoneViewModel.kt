@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 
+@Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
 class MainZoneViewModel {
 
     private var _monster = MutableLiveData<Monster>()
@@ -26,7 +27,6 @@ class MainZoneViewModel {
     // Connects to the database
 
     init {
-        var user = FirebaseAuth.getInstance().currentUser!!.uid
         getMonster()
     }
 
@@ -34,12 +34,12 @@ class MainZoneViewModel {
 
     fun getMonster() {
 
-        var maxLife: Int = 0
-        var actLife: Int = 0
-        var hunger: Int = 0
-        var happiness: Int = 0
-        var sleepiness: Int = 0
-        var age: Int = 0
+        var maxLife = 0
+        var actLife = 0
+        var hunger = 0
+        var happiness = 0
+        var sleepiness = 0
+        var age = 0
         var type = ""
 
         FirebaseFirestore.getInstance().collection("Monsters").document("1").get()
@@ -81,7 +81,7 @@ class MainZoneViewModel {
 
     private fun getAttacks(dc: DocumentSnapshot): ArrayList<Attack> {
 
-        var listAttacks = ArrayList<Attack>()
+        val listAttacks = ArrayList<Attack>()
 
         val attackDB = FirebaseFirestore.getInstance().collection("Config").document("combat")
             .collection("Attacks")

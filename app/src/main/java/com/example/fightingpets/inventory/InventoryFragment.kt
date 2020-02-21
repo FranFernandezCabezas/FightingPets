@@ -36,7 +36,7 @@ class InventoryFragment : Fragment() {
 
         /* Retrieves the monster from the SafeARgs */
 
-        var monster = InventoryFragmentArgs.fromBundle(arguments!!).monster
+        val monster = InventoryFragmentArgs.fromBundle(arguments!!).monster
 
         viewModel.setMonster(monster)
 
@@ -63,11 +63,11 @@ class InventoryFragment : Fragment() {
 
     private fun fillRecyclerItems(binding: InventoryFragmentBinding) {
 
-        var recView = binding.itemsRecyclerView
+        val recView = binding.itemsRecyclerView
 
         val adaptador: InventoryItemsAdapter
 
-        var itemsList: ArrayList<InventoryItem>
+        val itemsList: ArrayList<InventoryItem>
 
         recView.setHasFixedSize(true)
         if (viewModel.listItems.value != null) {

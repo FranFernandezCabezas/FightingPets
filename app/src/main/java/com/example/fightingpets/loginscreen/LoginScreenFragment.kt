@@ -35,9 +35,6 @@ class LoginScreenFragment : Fragment() {
             findNavController().navigate(LoginScreenFragmentDirections.actionLoginScreenFragmentToMainZone())
         }
 
-        val db = FirebaseFirestore.getInstance()
-        val monRef = db.collection("Monsters").document("prova")
-
         binding.aboutButton.setOnClickListener {
             // TODO: Fragment explaining some of the basic rules of the game
         }
