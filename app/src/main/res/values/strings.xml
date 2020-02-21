@@ -6,4 +6,48 @@
     <string name="hunger">Hunger</string>
     <string name="happiness">Happiness</string>
     <string name="sleepiness">Sleepiness</string>
+    <string name="lifebarNumbers">%1$d/%2$d</string>
+    <string name="intentory">Inventory</string>
+
+
+    <!-- Items description -->
+
+    <string name="potion"> A basic potion that heals minor wounds.</string>
+    <string name="super_potion">A upgraded version of the previous one. It can heal several wounds without problem.</string>
+    <string name="ultra_potion">The best of the best in healing power being able to recover almost any of the wounds without problem</string>
+    <string name="energizer">Basic energizer bottle. It accelerates everyone who drinks it</string>
+    <string name="super_energizer">This bottle contains extra power making a sleepwalker awake on the instant</string>
+    <string name="ultra_energizer">The strong power of this can makes everyone on the surroundings unable to sleep</string>
+    <string name="hotdog">A little hotdog.It is not the best food but if fills his job</string>
+    <string name="sleep_bag">A sleeping bag. It can be used to recover all of your energy but it takes time</string>
+    <string name="fish">Enormous fish that can fill the stomach of any living thing.</string>
+    <string name="coconut">This strange coconut makes anyone who drinks its juice feel totally filled and fed</string>
+    <string name="city">City</string>
+    <string name="forest">Forest</string>
+    <string name="desert">Desertic meadow</string>
+    <string name="wheretogo">Where do you want to go?</string>
+    <string name="bonuses">Bonus:</string>
+    <string name="stop">Stop trip</string>
+
+    <!-- Random encounters 1st part -->
+
+    <string name="firstpart1">Your pet walked to an outsite post</string>
+    <string name="firstpart2">Your pet found some strange magic item</string>
+    <string name="firstpart3">Your pet tried to run faster than light</string>
+    <string name="firstpart4">Your pet found a kind little animal</string>
+    <string name="firstpart5">Your pet was about to sleep on spot</string>
+    <string name="firstpart6">Your pet stared at the abyss</string>
+
+
+    <!-- Random encounters 2st part -->
+
+    <string name="secondpart1">it fell over and forgot what it was doing</string>
+    <string name="secondpart2">it smile to someone close</string>
+    <string name="secondpart3">it found out he was not real</string>
+    <string name="secondpart4">it got flatus</string>
+    <string name="secondpart5">it fell asleep</string>
+    <string name="secondpart6">it felt an strange bad feeling</string>
+    <string name="use">USE</string>
+    <string name="accept">Accept</string>
+
 </resources>

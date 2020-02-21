@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.fightingpets.mainzone.MainZoneViewModel" />
+    </data>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,6 +47,7 @@
             android:progressTint="#8BFD05"
             android:scaleX="0.75"
             android:scaleY="5"
+            android:progress="@{viewModel.lifePercentage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,6 +59,7 @@
             android:layout_marginTop="14dp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
+            android:text="@{String.format(@string/lifebarNumbers, viewModel.monster.currentLifePoints, viewModel.monster.maxLifePoints)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,7 +73,7 @@
             android:background="@drawable/progressbar_background"
             android:indeterminate="false"
             android:max="100"
-            android:progress="20"
+            android:progress="@{viewModel.monster.hunger}"
             android:progressDrawable="@drawable/stats_progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -84,53 +93,92 @@
             android:id="@+id/happines_imageView"
             android:layout_width="65dp"
             android:layout_height="79dp"
-            android:layout_marginStart="174dp"
+            android:layout_marginStart="67dp"
+            android:layout_marginEnd="49dp"
             android:layout_marginBottom="40dp"
             android:contentDescription="@string/happiness"
+            android:padding="5dp"
+            android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/posiblefelicidad" />
+            app:layout_constraintEnd_toStartOf="@+id/sleep_progressBar"
+            app:layout_constraintStart_toEndOf="@+id/hunger_imageView"
+            app:srcCompat="@drawable/heart" />
 
         <ProgressBar
             android:id="@+id/happines_progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="156dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/progressbar_background"
             android:indeterminate="false"
             android:max="100"
-            android:progress="20"
+            android:progress="@{viewModel.monster.happiness}"
             android:progressDrawable="@drawable/stats_progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/sleep_progressBar"
+            app:layout_constraintStart_toEndOf="@+id/hunger_progressBar" />
 
         <ProgressBar
             android:id="@+id/sleep_progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="288dp"
+            android:layout_marginEnd="23dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/progressbar_background"
             android:indeterminate="false"
             android:max="100"
-            android:progress="20"
+            android:progress="@{viewModel.monster.sleepiness}"
             android:progressDrawable="@drawable/stats_progress_bar"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/sleep_imageView"
             android:layout_width="55dp"
             android:layout_height="69dp"
-            android:layout_marginStart="310dp"
+            android:layout_marginEnd="25dp"
             android:layout_marginBottom="44dp"
             android:contentDescription="@string/sleepiness"
+            android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sleep_progressBar"
             app:srcCompat="@drawable/posibledormir" />
+
+        <ImageView
+            android:id="@+id/inventory_imageView"
+            android:layout_width="52dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/backpack" />
+
+        <ImageView
+            android:id="@+id/walk_imageView"
+            android:layout_width="52dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="75dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/walk" />
+
+        <ImageView
+            android:id="@+id/combat_imageView"
+            android:layout_width="52dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="135dp"
+            android:scaleType="centerInside"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/combat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

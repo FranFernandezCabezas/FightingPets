@@ -9,7 +9,17 @@
         android:id="@+id/main_zone"
         android:name="com.example.fightingpets.mainzone.MainZone"
         android:label="main_zone"
-        tools:layout="@layout/fragment_main_zone"/>
+        tools:layout="@layout/fragment_main_zone">
+        <action
+            android:id="@+id/action_main_zone_to_loginScreenFragment"
+            app:destination="@id/loginScreenFragment" />
+        <action
+            android:id="@+id/action_main_zone_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
+        <action
+            android:id="@+id/action_main_zone_to_walkingFragment"
+            app:destination="@id/walkingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginScreenFragment"
         android:name="com.example.fightingpets.loginscreen.LoginScreenFragment"
@@ -20,5 +30,29 @@
             app:destination="@id/main_zone"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.example.fightingpets.inventory.InventoryFragment"
+        android:label="inventory_fragment"
+        tools:layout="@layout/inventory_fragment" >
+        <action
+            android:id="@+id/action_inventoryFragment_to_main_zone"
+            app:destination="@id/main_zone" />
+        <argument
+            android:name="monster"
+            app:argType="com.example.fightingpets.Monster" />
+    </fragment>
+    <fragment
+        android:id="@+id/walkingFragment"
+        android:name="com.example.fightingpets.walk.WalkingFragment"
+        android:label="walking_fragment"
+        tools:layout="@layout/walking_fragment" >
+        <action
+            android:id="@+id/action_walkingFragment_to_main_zone"
+            app:destination="@id/main_zone" />
+        <argument
+            android:name="monster"
+            app:argType="com.example.fightingpets.Monster" />
     </fragment>
 </navigation>

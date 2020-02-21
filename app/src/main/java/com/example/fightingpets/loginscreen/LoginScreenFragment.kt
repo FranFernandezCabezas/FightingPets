@@ -23,8 +23,6 @@ class LoginScreenFragment : Fragment() {
 
     val SIGN_IN_REQUEST_CODE = 1001
 
-    private lateinit var viewModel: LoginScreenViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -33,7 +31,6 @@ class LoginScreenFragment : Fragment() {
             inflater, R.layout.login_screen_fragment, container, false)
 
         binding.loginButton.setOnClickListener {
-
             launchSignInFlow()
             findNavController().navigate(LoginScreenFragmentDirections.actionLoginScreenFragmentToMainZone())
         }
@@ -42,14 +39,12 @@ class LoginScreenFragment : Fragment() {
         val monRef = db.collection("Monsters").document("prova")
 
         binding.aboutButton.setOnClickListener {
-
-            val dades = HashMap<String, Any>()
-            dades["ultimUsuari"] = 1
-            dades["ultimMissatge"] = "gola"
-            monRef.set(dades)
+            // TODO: Fragment explaining some of the basic rules of the game
         }
         return binding.root
     }
+
+    /* Methods to get the user from the providers */
 
     private fun launchSignInFlow() {
         // Give users the option to sign in / register with their email or Google account.
@@ -73,6 +68,8 @@ class LoginScreenFragment : Fragment() {
             SIGN_IN_REQUEST_CODE
         )
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

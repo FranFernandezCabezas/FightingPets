@@ -2,12 +2,13 @@ package com.example.fightingpets.mainzone
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.fightingpets.Attack
 import com.example.fightingpets.Monster
 import com.example.fightingpets.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentSnapshot
 
 class MainZoneViewModel {
 
@@ -16,11 +17,22 @@ class MainZoneViewModel {
     val monster: LiveData<Monster>
         get() = _monster
 
+    private var _lifePercentage = MutableLiveData<Int>()
+
+    val lifePercentage: LiveData<Int>
+        get() = _lifePercentage
+
 
     // Connects to the database
-    val db = FirebaseFirestore.getInstance()
 
     init {
+        var user = FirebaseAuth.getInstance().currentUser!!.uid
+        getMonster()
+    }
+
+    /* Retrieves the monster from the database */
+
+    fun getMonster() {
 
         var maxLife: Int = 0
         var actLife: Int = 0
@@ -28,52 +40,75 @@ class MainZoneViewModel {
         var happiness: Int = 0
         var sleepiness: Int = 0
         var age: Int = 0
+        var type = ""
 
-        var user = FirebaseAuth.getInstance().currentUser
+        FirebaseFirestore.getInstance().collection("Monsters").document("1").get()
+            .addOnSuccessListener { snapshots ->
 
-        if (user != null) {
+                val attacks = getAttacks(snapshots)
 
-            println("Usuario ${user!!.uid}")
+                maxLife = snapshots.getLong("maxHP")!!.toInt()
 
-            db.collection("Monsters").whereEqualTo("userId", user.uid).
-                addSnapshotListener { snapshots, e ->
+                actLife = snapshots.getLong("actHP")!!.toInt()
 
-                if (!snapshots!!.isEmpty) {
+                hunger = snapshots.getLong("hunger")!!.toInt()
 
-                    for (dc in snapshots!!.documentChanges) {
+                happiness = snapshots.getLong("happiness")!!.toInt()
 
-                        when (dc.type) {
-                            DocumentChange.Type.ADDED -> {
-                                maxLife = (dc.document.getLong("maxHP"))!!.toInt()
+                sleepiness = snapshots.getLong("sleepiness")!!.toInt()
 
-                                actLife = (dc.document.getLong("actHP"))!!.toInt()
+                age = snapshots.getLong("age")!!.toInt()
 
-                                hunger = (dc.document.getLong("hunger"))!!.toInt()
+                type = snapshots.getString("monsterType")!!
 
-                                happiness = (dc.document.getLong("happiness"))!!.toInt()
+                _monster.value = Monster(
+                    maxLife,
+                    actLife,
+                    hunger,
+                    happiness,
+                    sleepiness,
+                    age,
+                    R.drawable.prueba,
+                    attacks,
+                    type
+                )
+                _lifePercentage.value = _monster.value!!.currentLifePercentage()
+            }
+    }
 
-                                sleepiness = (dc.document.getLong("sleepiness"))!!.toInt()
 
-                                age = (dc.document.getLong("age"))!!.toInt()
+    /* Retrieves the attacks from a monster by receiving the monster DocumentSnapshot */
 
-                                _monster.value = Monster(
-                                    maxLife,
-                                    actLife,
-                                    hunger,
-                                    happiness,
-                                    sleepiness,
-                                    age,
-                                    R.drawable.prueba
+    private fun getAttacks(dc: DocumentSnapshot): ArrayList<Attack> {
+
+        var listAttacks = ArrayList<Attack>()
+
+        val attackDB = FirebaseFirestore.getInstance().collection("Config").document("combat")
+            .collection("Attacks")
+
+        attackDB.addSnapshotListener { attackSnapshots, e ->
+
+            if (attackSnapshots != null) {
+
+                if (!attackSnapshots.isEmpty) {
+                    for (adc in attackSnapshots.documents) {
+
+                        if (adc.getString("name") == dc.getString("attack1") || adc.getString("name") == dc.getString(
+                                "attack2"
+                            )
+                        ) {
+                            listAttacks.add(
+                                Attack(
+                                    adc.getString("name")!!,
+                                    adc.getLong("damage")!!.toInt(),
+                                    adc.getString("type")!!
                                 )
-                            }
-
-                            DocumentChange.Type.MODIFIED -> {
-
-                            }
+                            )
                         }
                     }
                 }
             }
         }
+        return listAttacks
     }
 }
