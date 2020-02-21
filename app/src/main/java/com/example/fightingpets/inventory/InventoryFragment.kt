@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -15,6 +16,9 @@ import com.example.fightingpets.ItemType
 
 import com.example.fightingpets.R
 import com.example.fightingpets.databinding.InventoryFragmentBinding
+import com.google.android.gms.auth.api.Auth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class InventoryFragment : Fragment() {
 
@@ -32,6 +36,21 @@ class InventoryFragment : Fragment() {
         )
 
         binding.viewModel = viewModel
+
+        binding.lifecycleOwner = this
+
+        var user = FirebaseAuth.getInstance().currentUser!!.uid
+
+
+        FirebaseFirestore.getInstance().collection("Monsters").whereEqualTo("userId", user).get().addOnSuccessListener { mon ->
+
+            for (monster in mon) {
+
+                monster.reference.collection("Inventory").addSnapshotListener { items, e ->
+                    viewModel.getItems()
+                }
+            }
+        }
 
 
         /* Retrieves the monster from the SafeARgs */
@@ -52,7 +71,6 @@ class InventoryFragment : Fragment() {
         }
 
         binding.useButton.setOnClickListener {
-
             viewModel.useItem()
         }
 
@@ -78,6 +96,7 @@ class InventoryFragment : Fragment() {
                 binding.itemDescriptionTextview.text = it.descrip
                 binding.itemNameTextView.text = it.name
                 binding.objectImageView.setImageResource(it.icon)
+                binding.useButton.visibility = Button.VISIBLE
                 viewModel.setActualItem(it)
             })
         } else {

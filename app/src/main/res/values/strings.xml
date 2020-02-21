@@ -56,5 +56,8 @@
     <string name="object_image_descript">Image of the item selected</string>
     <string name="open_settings">Made to open the settings fragment</string>
     <string name="back_mainzone">Made to go back to mainzone</string>
+    <string name="ball">A little red ball. It can entertain a monster for hours</string>
+    <string name="puppet">With this puppet the time flies having fun</string>
+    <string name="mech">An incredible mech robot. It recharges with sunlight and moves around making great company</string>
 
 </resources>

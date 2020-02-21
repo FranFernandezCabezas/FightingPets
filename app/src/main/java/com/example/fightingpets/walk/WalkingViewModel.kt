@@ -19,6 +19,8 @@ class WalkingViewModel : ViewModel() {
 
     var sleepiness: Int = 0
 
+    private val repo = Repo()
+
 
     init {
         _textArea.value = ""
@@ -29,7 +31,7 @@ class WalkingViewModel : ViewModel() {
     fun makeRandomResponse() {
 
         var itemFound = false
-        var randomizer = Random.nextInt(0,7)
+        var randomizer = Random.nextInt(-1,7)
         var exit = "\n\n"
 
         when(randomizer) {
@@ -71,7 +73,10 @@ class WalkingViewModel : ViewModel() {
                 else -> exit += App.instance!!.getString(R.string.secondpart6)
             }
         }
-        sleepiness -= 1
+
+        repo.refreshMonsterData("sleepiness", sleepiness - 5)
+
+        sleepiness -= 5
 
         _textArea.value += exit
     }
@@ -106,6 +111,14 @@ class WalkingViewModel : ViewModel() {
 
         var item: InventoryItem = createInventoryItem("null", 0)
 
+        var randomizer = Random.nextInt(0,7)
+
+        if (randomizer == 7) {
+
+            item = createInventoryItem("Little funny ball", 1)
+
+        }
+
         when(zoneSelected) {
             1 -> item = createInventoryItem("Potion", 1)
 
@@ -137,12 +150,23 @@ class WalkingViewModel : ViewModel() {
         _textArea.value = "You've got: "
 
         for (item in itemsFound) {
-            _textArea.value += "\t ${item.quantity} ${item.name}"
+            _textArea.value += "\t ${item.quantity} ${item.name} \n"
+        }
+
+        if (sleepiness <= 0) {
+            _textArea.value += "\tYour pet is too tired to keep on."
         }
     }
 
 
     fun saveItems() {
-        // TODO: Save the new items to the Inventory database
+
+        _textArea.value = ""
+
+        var repo = Repo()
+
+        for (item in itemsFound) {
+            repo.refreshItemData(item.name, item.quantity)
+        }
     }
 }

@@ -89,9 +89,7 @@ class WalkingFragment : Fragment() {
                 viewModel.showItemsGotten()
                 binding.stopButton.text = getString(R.string.accept)
             } else {
-                HideButtons(false)
-                viewModel.saveItems()
-                stop = false
+                stopLoop()
             }
         }
 
@@ -104,18 +102,30 @@ class WalkingFragment : Fragment() {
         return binding.root
     }
 
+    private fun stopLoop() {
+        HideButtons(false)
+        binding.areaTextview.gravity = Gravity.BOTTOM
+        viewModel.saveItems()
+        stop = false
+    }
+
     private fun makeWalk() {
         HideButtons(true)
 
         coroutineScope.launch {
-            while (!stop) {
+            while (!stop && viewModel.sleepiness > 0) {
                 viewModel.makeRandomResponse()
                 withContext(Dispatchers.Default) {
                     delay(1000)
                 }
+                if (viewModel.sleepiness <= 0) {
+                    stopLoop()
+                }
             }
         }
     }
+
+    /* Changes the layout visually depending on the loop current state. */
 
     private fun HideButtons(hide: Boolean) {
 
@@ -129,8 +139,9 @@ class WalkingFragment : Fragment() {
             binding.textView.visibility = TextView.GONE
             binding.areaTextview.visibility = TextView.VISIBLE
             binding.stopButton.visibility = Button.VISIBLE
+            binding.backFromWalkingImageView.visibility = ImageView.INVISIBLE
         } else {
-                binding.townButton.visibility = Button.VISIBLE
+            binding.townButton.visibility = Button.VISIBLE
             binding.deserticButton.visibility = Button.VISIBLE
             binding.forestButton.visibility = Button.VISIBLE
             binding.bonusesTextView.visibility = TextView.VISIBLE
@@ -139,8 +150,12 @@ class WalkingFragment : Fragment() {
             binding.textView.visibility = TextView.VISIBLE
             binding.areaTextview.visibility = TextView.GONE
             binding.stopButton.visibility = Button.GONE
+            binding.backFromWalkingImageView.visibility = ImageView.VISIBLE
         }
     }
+
+
+    /* Changes the button depending on the previous selection. */
 
     private fun changeButtons(selected: Int) {
 
@@ -171,14 +186,5 @@ class WalkingFragment : Fragment() {
             }
         }
 
-    }
-
-    override fun onDestroy() {
-
-        var repo = Repo()
-
-        repo.refreshData("sleepiness", viewModel.sleepiness)
-
-        super.onDestroy()
     }
 }

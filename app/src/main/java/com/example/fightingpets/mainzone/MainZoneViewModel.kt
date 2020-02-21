@@ -23,6 +23,7 @@ class MainZoneViewModel {
     val lifePercentage: LiveData<Int>
         get() = _lifePercentage
 
+    var user = FirebaseAuth.getInstance().currentUser!!.uid
 
     // Connects to the database
 
@@ -42,37 +43,41 @@ class MainZoneViewModel {
         var age = 0
         var type = ""
 
-        FirebaseFirestore.getInstance().collection("Monsters").document("1").get()
+
+        FirebaseFirestore.getInstance().collection("Monsters").whereEqualTo("userId", user).get()
             .addOnSuccessListener { snapshots ->
 
-                val attacks = getAttacks(snapshots)
+                for (monster in snapshots) {
 
-                maxLife = snapshots.getLong("maxHP")!!.toInt()
+                    val attacks = getAttacks(monster)
 
-                actLife = snapshots.getLong("actHP")!!.toInt()
+                    maxLife = monster.getLong("maxHP")!!.toInt()
 
-                hunger = snapshots.getLong("hunger")!!.toInt()
+                    actLife = monster.getLong("actHP")!!.toInt()
 
-                happiness = snapshots.getLong("happiness")!!.toInt()
+                    hunger = monster.getLong("hunger")!!.toInt()
 
-                sleepiness = snapshots.getLong("sleepiness")!!.toInt()
+                    happiness = monster.getLong("happiness")!!.toInt()
 
-                age = snapshots.getLong("age")!!.toInt()
+                    sleepiness = monster.getLong("sleepiness")!!.toInt()
 
-                type = snapshots.getString("monsterType")!!
+                    age = monster.getLong("age")!!.toInt()
 
-                _monster.value = Monster(
-                    maxLife,
-                    actLife,
-                    hunger,
-                    happiness,
-                    sleepiness,
-                    age,
-                    R.drawable.prueba,
-                    attacks,
-                    type
-                )
-                _lifePercentage.value = _monster.value!!.currentLifePercentage()
+                    type = monster.getString("monsterType")!!
+
+                    _monster.value = Monster(
+                        maxLife,
+                        actLife,
+                        hunger,
+                        happiness,
+                        sleepiness,
+                        age,
+                        R.drawable.prueba,
+                        attacks,
+                        type
+                    )
+                    _lifePercentage.value = _monster.value!!.currentLifePercentage()
+                }
             }
     }
 
